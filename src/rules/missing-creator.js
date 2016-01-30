@@ -1,19 +1,15 @@
-import util from '../util'
+import {isDefineActionCall, getPropertiesOfSecondArgumentOf, findInProperties} from '../util'
 
 module.exports = function (context) {
   const creatorName = context.options[0] || 'creator'
 
-  function getKeyName (property) {
-    return property.key.name
-  }
-
   return {
     CallExpression (node) {
-      if (!util.isDefineActionCall(node)) {
+      if (!isDefineActionCall(node)) {
         return
       }
-      const properties = util.getPropertiesOfSecondArgumentOf(node)
-      const creator = properties.find(property => getKeyName(property) === creatorName)
+      const properties = getPropertiesOfSecondArgumentOf(node)
+      const creator = findInProperties(properties, creatorName)
       if (!creator) {
         context.report(node, 'Missing ' + creatorName + ' function')
       }

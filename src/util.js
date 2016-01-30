@@ -6,15 +6,19 @@ function secondArgumentIsObject (node) {
   return node.arguments.length && node.arguments[1].type === 'ObjectExpression'
 }
 
-exports.getPropertiesOfSecondArgumentOf = function (node) {
+export function findInProperties (properties, name) {
+  return properties.find(property => property.key.name === name)
+}
+
+export function getPropertiesOfSecondArgumentOf (node) {
   return node.arguments.length && node.arguments[1].properties
 }
 
-exports.getActionType = function (node) {
+export function getActionType (node) {
   return node.arguments.length && node.arguments[0]
 }
 
-exports.isDefineActionCall = function (node) {
+export function isDefineActionCall (node) {
   if (node.callee.type === 'MemberExpression') {
     const propertyName = node.callee.property.name
     if (propertyName === 'defineAction') {

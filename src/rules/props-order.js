@@ -1,4 +1,4 @@
-import util from '../util'
+import {isDefineActionCall, getPropertiesOfSecondArgumentOf} from '../util'
 
 /**
  * Get the methods order from the default config and the user config
@@ -249,10 +249,10 @@ module.exports = function (context) {
 
   return {
     CallExpression (node) {
-      if (!util.isDefineActionCall(node)) {
+      if (!isDefineActionCall(node)) {
         return
       }
-      const properties = util.getPropertiesOfSecondArgumentOf(node)
+      const properties = getPropertiesOfSecondArgumentOf(node)
       checkPropsOrder(properties)
       reportErrors()
     }

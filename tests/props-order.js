@@ -16,8 +16,7 @@ duck.defineAction(ACTION_TYPE, {
     return Object.assign({}, state, {error: action.payload});
   },
 });
-`,
-      args: 2
+`
     },
     {
       code: `
@@ -30,8 +29,7 @@ duck.defineAction(ACTION_TYPE, {
   },
   redirect: function() { return 'path/to/redirect'; }
 });
-`,
-      args: 2
+`
     },
     {
       code: `
@@ -41,8 +39,7 @@ duck.defineAction(ACTION_TYPE, {
   },
   redirect: function() { return 'path/to/redirect'; }
 });
-`,
-      args: 2
+`
     }
   ],
 
@@ -58,7 +55,6 @@ duck.defineAction(ACTION_TYPE, {
   },
 });
 `,
-      args: 2,
       errors: [{
         message: 'reducer should be placed after creator'
       }]

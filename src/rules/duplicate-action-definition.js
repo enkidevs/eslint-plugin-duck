@@ -1,4 +1,4 @@
-import util from '../util'
+import {isDefineActionCall, getActionType} from '../util'
 
 const DUPLICATE_MESSAGE = 'The action {{actionType}} is already defined'
 
@@ -28,11 +28,11 @@ module.exports = function (context) {
           actionDefinitionNode = child.expression.right
         }
 
-        if (!actionDefinitionNode || !util.isDefineActionCall(actionDefinitionNode)) {
+        if (!actionDefinitionNode || !isDefineActionCall(actionDefinitionNode)) {
           return
         }
 
-        const actionTypeNode = util.getActionType(actionDefinitionNode)
+        const actionTypeNode = getActionType(actionDefinitionNode)
 
         if (alreadyDefined[actionTypeNode.value || actionTypeNode.name]) {
           errors.push(actionTypeNode)
