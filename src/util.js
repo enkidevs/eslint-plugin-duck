@@ -19,6 +19,7 @@ export function getActionType (node) {
 }
 
 export function isDefineActionCall (node) {
+  if (node.type !== 'CallExpression') { return false }
   if (node.callee.type === 'MemberExpression') {
     const propertyName = node.callee.property.name
     if (propertyName === 'defineAction') {
