@@ -1,28 +1,31 @@
+import Fuse from 'fuse.js'
 import {isDefineActionCall, getPropertiesOfSecondArgumentOf, findInProperties} from '../util'
-
-const INVALID_MESSAGE = 'Meta key {{meta}} is invalid'
 
 module.exports = function (context) {
   const errors = []
 
   const metaKeys = context.options[0] || []
+  const fuse = new Fuse(metaKeys.map(k => { return {k} }), {keys: ['k'], id: 'k'})
   const creatorName = context.options[1] || 'creator'
 
   /**
    * Report errors
    */
   function reportErrors () {
-    errors.forEach(node => {
-      context.report(node, INVALID_MESSAGE, {
-        meta: node.key.name
-      })
+    errors.forEach(({node, closest}) => {
+      let message = `Meta key ${node.key.name} is invalid`
+      if (closest) {
+        message += `. Do you mean "${closest}"?`
+      }
+      context.report(node, message)
     })
   }
 
   function checkMetaKeys (meta) {
     meta.forEach(prop => {
       if (metaKeys.indexOf(prop.key.name) === -1) {
-        errors.push(prop)
+        const closest = fuse.search(prop.key.name)[0]
+        errors.push({node: prop, closest})
       }
     })
   }

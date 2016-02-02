@@ -63,6 +63,24 @@ duck.defineAction(ACTION_TYPE, {
       errors: [{
         message: 'Meta key test is invalid'
       }]
+    },
+    {
+      code: `
+duck.defineAction(ACTION_TYPE, {
+  creator: function(message) {
+    return {
+      payload: message,
+      meta: {
+        test_wrong: '1'
+      }
+    };
+  },
+});
+`,
+      options: [['test']],
+      errors: [{
+        message: 'Meta key test_wrong is invalid. Do you mean "test"?'
+      }]
     }
   ]
 })
