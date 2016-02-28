@@ -46,6 +46,6 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "fuse.js": "2.0.1"
+    "fuse.js": "2.0.2"
   }
 }
