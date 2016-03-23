@@ -1,6 +1,6 @@
 import {RuleTester} from 'eslint'
 
-import rule from '../src/rules/meta-validation'
+import rule from '../src/rules/no-type-in-creator'
 
 const ruleTester = new RuleTester()
 
@@ -32,7 +32,7 @@ duck.defineAction(ACTION_TYPE, {
     {
       code: `
 duck.defineAction(ACTION_TYPE, {
-  creator: function(message) {
+  customCreatorKey: function(message) {
     return {
       payload: message,
       meta: {
@@ -42,7 +42,7 @@ duck.defineAction(ACTION_TYPE, {
   },
 });
 `,
-      options: [['test']]
+      options: [['customCreatorKey']]
     }
   ],
 
@@ -52,7 +52,7 @@ duck.defineAction(ACTION_TYPE, {
 duck.defineAction(ACTION_TYPE, {
   creator: function(message) {
     return {
-      payload: message,
+      type: message,
       meta: {
         test: '1'
       }
@@ -61,25 +61,7 @@ duck.defineAction(ACTION_TYPE, {
 });
 `,
       errors: [{
-        message: 'Meta key \'test\' is invalid'
-      }]
-    },
-    {
-      code: `
-duck.defineAction(ACTION_TYPE, {
-  creator: function(message) {
-    return {
-      payload: message,
-      meta: {
-        test_wrong: '1'
-      }
-    };
-  },
-});
-`,
-      options: [['test']],
-      errors: [{
-        message: 'Meta key \'test_wrong\' is invalid. Do you mean "test"?'
+        message: '\'type\' is specified bu should\'t'
       }]
     }
   ]

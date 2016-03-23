@@ -18,7 +18,7 @@ module.exports.action2 = duck.defineAction(ACTION_TYPE_2, {});
 `
     },
     {
-      code: ``
+      code: ''
     }
   ],
 

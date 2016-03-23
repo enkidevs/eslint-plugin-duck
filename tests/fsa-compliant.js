@@ -1,6 +1,6 @@
 import {RuleTester} from 'eslint'
 
-import rule from '../src/rules/meta-validation'
+import rule from '../src/rules/fsa-compliant'
 
 const ruleTester = new RuleTester()
 
@@ -41,8 +41,35 @@ duck.defineAction(ACTION_TYPE, {
     };
   },
 });
-`,
-      options: [['test']]
+`
+    },
+    {
+      code: `
+duck.defineAction(ACTION_TYPE, {
+  creator: function(message) {
+    return {
+      type: message,
+      meta: {
+        test: '1'
+      }
+    };
+  },
+});
+`
+    },
+    {
+      code: `
+duck.defineAction(ACTION_TYPE, {
+  creator: function(message) {
+    return {
+      error: message,
+      meta: {
+        test: '1'
+      }
+    };
+  },
+});
+`
     }
   ],
 
@@ -52,7 +79,7 @@ duck.defineAction(ACTION_TYPE, {
 duck.defineAction(ACTION_TYPE, {
   creator: function(message) {
     return {
-      payload: message,
+      other_key: message,
       meta: {
         test: '1'
       }
@@ -61,25 +88,7 @@ duck.defineAction(ACTION_TYPE, {
 });
 `,
       errors: [{
-        message: 'Meta key \'test\' is invalid'
-      }]
-    },
-    {
-      code: `
-duck.defineAction(ACTION_TYPE, {
-  creator: function(message) {
-    return {
-      payload: message,
-      meta: {
-        test_wrong: '1'
-      }
-    };
-  },
-});
-`,
-      options: [['test']],
-      errors: [{
-        message: 'Meta key \'test_wrong\' is invalid. Do you mean "test"?'
+        message: 'Action key \'other_key\' is invalid'
       }]
     }
   ]

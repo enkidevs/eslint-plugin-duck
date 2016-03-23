@@ -1,23 +1,11 @@
-BIN=node_modules/.bin
+include node_modules/@mathieudutour/js-fatigue/Makefile
 
 MOCHA_ARGS= --compilers js:babel-register \
 		--recursive \
 		tests/*.js
-MOCHA_TARGET=tests/*.js
-
-build:
-	$(BIN)/babel src --out-dir lib
-
-clean:
-	rm -rf lib
 
 test: lint
-	NODE_ENV=test $(BIN)/mocha $(MOCHA_ARGS) $(MOCHA_TARGET)
+	NODE_ENV=test $(BIN_DIR)/mocha $(MOCHA_ARGS)
 
-test-watch: lint
-	NODE_ENV=test $(BIN)/mocha $(MOCHA_ARGS) -w $(MOCHA_TARGET)
-
-lint:
-	$(BIN)/eslint src && $(BIN)/eslint tests
-
-PHONY: build clean test test-watch lint
+test-watch:
+	NODE_ENV=test $(BIN_DIR)/mocha $(MOCHA_ARGS) -w tests/*.js

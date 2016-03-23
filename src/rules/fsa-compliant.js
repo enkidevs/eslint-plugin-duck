@@ -4,16 +4,16 @@ import {isDefineActionCall, getPropertiesOfSecondArgumentOf, findInProperties} f
 export default function (context) {
   const errors = []
 
-  const metaKeys = context.options[0] || []
-  const fuse = new Fuse(metaKeys.map(k => { return {k} }), {keys: ['k'], id: 'k'})
-  const creatorName = context.options[1] || 'creator'
+  const fsaKeys = ['payload', 'meta', 'error', 'type']
+  const fuse = new Fuse(fsaKeys.map(k => { return {k} }), {keys: ['k'], id: 'k'})
+  const creatorName = context.options[0] || 'creator'
 
   /**
    * Report errors
    */
   function reportErrors () {
     errors.forEach(({node, closest}) => {
-      let message = `Meta key \'${node.key.name}\' is invalid`
+      let message = `Action key \'${node.key.name}\' is invalid`
       if (closest) {
         message += `. Do you mean "${closest}"?`
       }
@@ -21,9 +21,9 @@ export default function (context) {
     })
   }
 
-  function checkMetaKeys (meta) {
-    meta.forEach(prop => {
-      if (metaKeys.indexOf(prop.key.name) === -1) {
+  function checkKeys (keys) {
+    keys.forEach(prop => {
+      if (fsaKeys.indexOf(prop.key.name) === -1) {
         const closest = fuse.search(prop.key.name)[0]
         errors.push({node: prop, closest})
       }
@@ -44,23 +44,12 @@ export default function (context) {
       if (!action || action.argument.type !== 'ObjectExpression') {
         return
       }
-      action = action.argument
-      const meta = findInProperties(action.properties, 'meta')
-      if (!meta || meta.value.type !== 'ObjectExpression') {
-        return
-      }
-
-      checkMetaKeys(meta.value.properties)
+      checkKeys(action.argument.properties)
       reportErrors()
     }
   }
 }
 
 export const schema = [{
-  type: 'array',
-  items: {
-    type: 'string'
-  }
-}, {
   type: 'string'
 }]

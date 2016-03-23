@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   rules: {
     'duplicate-action-definition': require('./rules/duplicate-action-definition'),
     'meta-validation': require('./rules/meta-validation'),
