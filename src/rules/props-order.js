@@ -26,7 +26,7 @@ function getMethodsOrder (defaultConfig, userConfig) {
 
 const MISPOSITION_MESSAGE = '{{propA}} should be placed {{position}} {{propB}}'
 
-export default function (context) {
+module.exports = function (context) {
   const errors = {}
 
   const methodsOrder = getMethodsOrder({
@@ -259,7 +259,7 @@ export default function (context) {
   }
 }
 
-export const schema = [{
+module.exports.schema = [{
   type: 'object',
   properties: {
     order: {

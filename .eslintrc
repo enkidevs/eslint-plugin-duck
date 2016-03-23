@@ -6,3 +6,4 @@ extends:
 parser: babel-eslint
 rules:
   arrow-parens: 0
+  import/default: 0

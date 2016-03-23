@@ -2,7 +2,7 @@ import {isDefineActionCall, getActionType} from '../util'
 
 const DUPLICATE_MESSAGE = 'The action {{actionType}} is already defined'
 
-export default function (context) {
+module.exports = function (context) {
   const errors = []
 
   const alreadyDefined = {}
@@ -45,4 +45,4 @@ export default function (context) {
   }
 }
 
-export const schema = []
+module.exports.schema = []

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-duck",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "author": "Mathieu Dutour <mathieu@dutour.me>",
   "description": "",
   "main": "build/index.js",
@@ -20,7 +20,7 @@
   "bugs": "https://github.com/enkidevs/eslint-plugin-duck/issues/",
   "devDependencies": {
     "@mathieudutour/js-fatigue": "^1.0.4",
-    "mocha": "2.4.5"
+    "mocha": "^2.4.5"
   },
   "keywords": [
     "eslint",

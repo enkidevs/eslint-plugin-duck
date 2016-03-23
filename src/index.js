@@ -1,17 +1,10 @@
-import duplicateActionDefinition from './rules/duplicate-action-definition'
-import fsaCompliant from './rules/fsa-compliant'
-import metaValidation from './rules/meta-validation'
-import missingCreator from './rules/missing-creator'
-import noTypeInCreator from './rules/no-type-in-creator'
-import propsOrder from './rules/props-order'
-
 export const rules = {
-  'duplicate-action-definition': duplicateActionDefinition,
-  'fsa-compliant': fsaCompliant,
-  'meta-validation': metaValidation,
-  'missing-creator': missingCreator,
-  'no-type-in-creator': noTypeInCreator,
-  'props-order': propsOrder
+  'duplicate-action-definition': require('./rules/duplicate-action-definition'),
+  'meta-validation': require('./rules/meta-validation'),
+  'missing-creator': require('./rules/missing-creator'),
+  'props-order': require('./rules/props-order'),
+  'fsa-compliant': require('./rules/fsa-compliant'),
+  'no-type-in-creator': require('./rules/no-type-in-creator')
 }
 
 export const configs = {

@@ -1,6 +1,6 @@
 import {isDefineActionCall, getPropertiesOfSecondArgumentOf, findInProperties} from '../util'
 
-export default function (context) {
+module.exports = function (context) {
   const creatorName = context.options[0] || 'creator'
 
   return {
@@ -17,6 +17,6 @@ export default function (context) {
   }
 }
 
-export const schema = [{
+module.exports.schema = [{
   type: 'string'
 }]

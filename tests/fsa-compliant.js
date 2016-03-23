@@ -4,7 +4,7 @@ import rule from '../src/rules/fsa-compliant'
 
 const ruleTester = new RuleTester()
 
-ruleTester.run('meta-validation', rule, {
+ruleTester.run('fsa-compliant', rule, {
   valid: [
     {
       code: `

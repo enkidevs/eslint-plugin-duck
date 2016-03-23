@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js'
 import {isDefineActionCall, getPropertiesOfSecondArgumentOf, findInProperties} from '../util'
 
-export default function (context) {
+module.exports = function (context) {
   const errors = []
 
   const metaKeys = context.options[0] || []
@@ -56,7 +56,7 @@ export default function (context) {
   }
 }
 
-export const schema = [{
+module.exports.schema = [{
   type: 'array',
   items: {
     type: 'string'

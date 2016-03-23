@@ -4,7 +4,7 @@ import rule from '../src/rules/no-type-in-creator'
 
 const ruleTester = new RuleTester()
 
-ruleTester.run('meta-validation', rule, {
+ruleTester.run('no-type-in-creator', rule, {
   valid: [
     {
       code: `
@@ -42,7 +42,7 @@ duck.defineAction(ACTION_TYPE, {
   },
 });
 `,
-      options: [['customCreatorKey']]
+      options: ['customCreatorKey']
     }
   ],
 
