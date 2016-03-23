@@ -16,7 +16,6 @@ export default {
     'no-type-in-creator': 0
   },
   configs: {
-    'errors': require('../config/errors'),
-    'warnings': require('../config/warnings')
+    'recommended': require('../config/recommended')
   }
 }
