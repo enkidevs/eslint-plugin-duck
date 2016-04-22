@@ -23,9 +23,9 @@ module.exports = function (context) {
       node.body.forEach(child => {
         let actionDefinitionNode
         if (child.type === 'ExportNamedDeclaration') {
-          actionDefinitionNode = ((child.declaration.declarations || [])[0] || {}).init
+          actionDefinitionNode = (((child.declaration || {}).declarations || [])[0] || {}).init
         } else if (child.type === 'ExpressionStatement') {
-          actionDefinitionNode = child.expression.right
+          actionDefinitionNode = (child.expression || {}).right
         }
 
         if (!actionDefinitionNode || !isDefineActionCall(actionDefinitionNode)) {
