@@ -20,7 +20,7 @@
   "bugs": "https://github.com/enkidevs/eslint-plugin-duck/issues/",
   "devDependencies": {
     "@mathieudutour/js-fatigue": "^1.0.4",
-    "mocha": "^3.3.0"
+    "mocha": "^3.4.2"
   },
   "keywords": [
     "eslint",
